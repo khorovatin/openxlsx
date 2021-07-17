@@ -1,5 +1,5 @@
 
-
+#include "pugixml.hpp"
 #include <Rcpp.h>
 #include <iostream>
 #include <fstream>
