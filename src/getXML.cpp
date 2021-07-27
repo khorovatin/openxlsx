@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <sstream>
+#include "pugixml.hpp"
 
 // [[Rcpp::export]]
 SEXP getXML1(std::string str, std::string child) {
