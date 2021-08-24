@@ -22,7 +22,7 @@
 #' a surrounding border is drawn with a border around each row. If
 #' "\code{columns}", a surrounding border is drawn with a border between
 #' each column. If "\code{all}" all cell borders are drawn.
-#' @param borderColour Colour of cell border.  A valid colour (belonging to \code{colours()} or a hex colour code, eg see \href{https://www.webfx.com/web-design/color-picker/}{here}).
+#' @param borderColour Colour of cell border.  A valid colour (belonging to \code{colours()} or a hex colour code, eg see \href{https://www.w3schools.com/colors/colors_picker.asp}{here}).
 #' @param borderStyle Border line style
 #' \itemize{
 #'    \item{\bold{none}}{ no border}
