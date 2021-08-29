@@ -120,8 +120,8 @@ read.xlsx.default <- function(
     sheetselected <- FALSE
   }
   
-  if (!grepl("\\.xlsx$", xlsxFile)) {
-    stop("openxlsx can only read .xlsx files", call. = FALSE)
+  if (!grepl("\\.xlsx|\\.xlsm$", xlsxFile)) {
+    stop("openxlsx can only read .xlsx or .xlsm files", call. = FALSE)
   }
   
   assert_true_false1(colNames)
@@ -139,10 +139,8 @@ read.xlsx.default <- function(
     rows <- as.integer(sort(rows))
   }
   
-  xmlDir <-
-    file.path(tempdir(), paste0(sample(LETTERS, 10), collapse = ""), "_excelXMLRead")
+  xmlDir <- paste0(tempfile(), "_excelXMLRead")
   xmlFiles <- unzip(xlsxFile, exdir = xmlDir)
-  
   on.exit(unlink(xmlDir, recursive = TRUE), add = TRUE)
   
   sharedStringsFile <- grep("sharedStrings.xml$", xmlFiles, perl = TRUE, value = TRUE)

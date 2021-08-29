@@ -6,9 +6,11 @@
 * `loadWorkbook()` imports `inlineStr`. Values remain `inlineStr` when writing the workbook with `saveWorkbook()`. Similar `read.xlsx` and `readWorkbook` import `inlineStr`.
 * `read.xlsx()` no longer changes random seed ([#183](https://github.com/ycphs/openxlsx/issues/183))
 * fixed a regression that caused fonts to be read in incorrectly ([#207](https://github.com/ycphs/openxlsx/issues/207))
-* add option to save as read only recommended ([#201](https://github.com/ycphs/openxlsx/issues/201))
-* fixed writing hyperlink formulas ([#212](https://github.com/ycphs/openxlsx/issues/212))
+* add option to save as read only recommended ([#201](https://github.com/ychps/openxlsx/issues/201))
+* fixed writing hyperlink formulas ([#200](https://github.com/ychps/openxlsx/issues/200))
 * `write.xlsx()` now throws an error if it doesn't have write permissions ([#190](https://github.com/ycphs/openxlsx/issues/190))
+* `Workbook$show()` no longer fails when called in a 0 sheet workbook([#240](https://github.com/ychps/openxlsx/issues/240))
+* `read.xlsx()` again accepts `.xlsm` files ([#205](https://github.com/ychps/openxlsx/issues/205), [#209](https://github.com/ychps/openxlsx/issues/209))
 
 # openxlsx 4.2.4
 

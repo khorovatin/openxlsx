@@ -828,11 +828,14 @@ Workbook$methods(
       fl = file.path(relsDir, ".rels")
     )
 
+    app <- "<Application>Microsoft Excel</Application>"
+    # further protect argument (might be extended with: <ScaleCrop>, <HeadingPairs>, <TitlesOfParts>, <LinksUpToDate>, <SharedDoc>, <HyperlinksChanged>, <AppVersion>)
+    if (!is.null(workbook$apps)) app <- paste0(app, workbook$apps)
 
     ## write app.xml
     write_file(
       head = '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">',
-      body = "<Application>Microsoft Excel</Application>",
+      body = app,
       tail = "</Properties>",
       fl = file.path(docPropsDir, "app.xml")
     )
@@ -1637,9 +1640,9 @@ Workbook$methods(
   getBaseFont = function() {
     baseFont <- styles$fonts[[1]]
 
-    sz <- getAttrs(baseFont, "<sz ")
-    colour <- getAttrs(baseFont, "<color ")
-    name <- getAttrs(baseFont, "<name ")
+    sz <- getAttrs(baseFont, "sz")
+    colour <- getAttrs(baseFont, "color")
+    name <- getAttrs(baseFont, "name")
 
     if (length(sz[[1]]) == 0) {
       sz <- list("val" = "10")
@@ -3821,7 +3824,7 @@ Workbook$methods(
     
     
     
-    if (aSheet >= 1) {
+    if (aSheet >= 1 & nSheets > 0) {
       showText <-
         c(
           showText,
@@ -4058,7 +4061,7 @@ Workbook$methods(
             }
 
             flags <-
-              c("bold", "italic", "underline") %in% names(thisFont)
+              c("bold", "italic", "underline", "strikeout") %in% names(thisFont)
             if (any(flags)) {
               style$fontDecoration <- NULL
               if (flags[[1]]) {
@@ -4074,6 +4077,11 @@ Workbook$methods(
               if (flags[[3]]) {
                 style$fontDecoration <-
                   append(style$fontDecoration, "UNDERLINE")
+              }
+
+              if (flags[[4]]) {
+                style$fontDecoration <-
+                  append(style$fontDecoration, "STRIKEOUT")
               }
             }
           }
@@ -4223,7 +4231,8 @@ Workbook$methods(
   protectWorkbook = function(protect = TRUE,
                              lockStructure = FALSE,
                              lockWindows = FALSE,
-                             password = NULL) {
+                             password = NULL,
+                             type = NULL) {
     attr <- c()
     if (!is.null(password)) {
       attr["workbookPassword"] <- hashPassword(password)
@@ -4248,6 +4257,8 @@ Workbook$methods(
             sep = ""
           )
         )
+      if (!is.null(type) | !is.null(password))
+        workbook$apps <<- sprintf("<DocSecurity>%i</DocSecurity>", type)
     } else {
       workbook$workbookProtection <<- ""
     }
