@@ -11,6 +11,7 @@
 * `write.xlsx()` now throws an error if it doesn't have write permissions ([#190](https://github.com/ycphs/openxlsx/issues/190))
 * `Workbook$show()` no longer fails when called in a 0 sheet workbook([#240](https://github.com/ychps/openxlsx/issues/240))
 * `read.xlsx()` again accepts `.xlsm` files ([#205](https://github.com/ychps/openxlsx/issues/205), [#209](https://github.com/ychps/openxlsx/issues/209))
+* `makeHyperlinkString()` does no longer require a sheet argument ([#57](https://github.com/ychps/openxlsx/issues/57), [#58](https://github.com/ychps/openxlsx/issues/58))
 
 # openxlsx 4.2.4
 
